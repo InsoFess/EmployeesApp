@@ -30,7 +30,6 @@ class App extends Component {
         })
     }
 
-    // Да, пока могут добавляться пустые пользователи. Мы это еще исправим
     addItem = (name, salary) => {
         const newItem = {
             name, 
@@ -72,6 +71,19 @@ class App extends Component {
         this.setState({term})
     }
 
+    onPromotion = (items) => {
+         console.log('Promotion')
+         return items.filter(item => {
+            return item.rise === true
+         })
+    }
+
+    onSalary = (items) => {
+        return items.filter(item => {
+            return item.salary > 1000})
+
+    }
+
     render() {
         const {data,term} = this.state;
         const employees = this.state.data.length;
@@ -84,7 +96,9 @@ class App extends Component {
     
                 <div className="search-panel">
                     <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
-                    <AppFilter/>
+                    <AppFilter
+                    onPromotion={this.onPromotion}
+                    onSalary={this.onSalary}/>
                 </div>
                 
                 <EmployeesList 
